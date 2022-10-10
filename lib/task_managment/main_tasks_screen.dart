@@ -1,11 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'data/dummy_data.dart';
+import 'models/task_model.dart';
 import 'views/screens/all_task.dart';
 import 'views/screens/complete_task.dart';
 import 'views/screens/incomplete_task.dart';
 
-class MainTaskScreen extends StatelessWidget {
+class MainTaskScreen extends StatefulWidget {
+  @override
+  State<MainTaskScreen> createState() => _MainTaskScreenState();
+}
+
+class _MainTaskScreenState extends State<MainTaskScreen> {
+  checkTask(TaskModel taskModel){
+    int index=tasks.indexOf(taskModel);
+    print(tasks[index].isComplete);
+    tasks[index].isComplete=!tasks[index].isComplete;
+    print(tasks[index].isComplete);
+    setState(() {});
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -28,12 +42,11 @@ class MainTaskScreen extends StatelessWidget {
         ]),
       ),
       body: TabBarView(children: [
-        AllTaskScreen(),
-        CompleteTaskScreen(),
-        InCompleteTaskScreen(),
+        AllTaskScreen(checkTask: checkTask,),
+        CompleteTaskScreen(checkTask: checkTask,),
+        InCompleteTaskScreen(checkTask: checkTask,),
       ]),
       ),
     );
   }
-  
-  }
+}

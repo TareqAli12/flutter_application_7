@@ -4,7 +4,8 @@ import 'package:flutter_application_7/task_managment/models/task_model.dart';
 
 class TaskWidget extends StatefulWidget {
   TaskModel taskModel;
-  TaskWidget(this.taskModel);
+  Function function;
+  TaskWidget(this.taskModel, this.function);
 
   @override
   State<TaskWidget> createState() => _TaskWidgetState();
@@ -19,9 +20,7 @@ class _TaskWidgetState extends State<TaskWidget> {
       checkColor: Colors.orangeAccent,
       value: widget.taskModel.isComplete, 
       onChanged: ((v) {
-   setState(() {
-     widget.taskModel.isComplete = v!;
-   });
+        widget.function(widget.taskModel);
       }),
       title: Text(widget.taskModel.name),
       );
