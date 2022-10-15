@@ -30,6 +30,11 @@ class _MainTaskScreenState extends State<MainTaskScreen> with SingleTickerProvid
     super.initState();
     initializeTabController();
   }
+  @override
+  void dispose(){
+    super.dispose();
+    tabController.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {
